@@ -46,8 +46,6 @@ export const Currency = styled.a `
   -webkit-appearance:none; 
   appearance:none;
   padding: 10px;
-  // background: none;
-  // background: ([RiArrowDownSFill]);
   border: none;
 
 
