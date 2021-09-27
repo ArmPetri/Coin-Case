@@ -1,26 +1,37 @@
 import React, {useState} from 'react'
-import {Nav, NavbarContainer, NavMenu, NavItem, NavLink, Mode, Currency} from './NavbarElements'
+import {Nav, NavbarContainer, NavMenu, NavItem, NavLink, SunTheme, MoonTheme, Dropdown, Arrdown, Arrup, Currency, CurrencySpan} from './NavbarElements'
 import Modal from '../Modal'
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false)
+  const [currency, setCurrency] = useState('USD')
   const [showModal, setShowModal] = useState(false)
   const [whichModal, setWhichModal] = useState('')
+  const [theme, setTheme] = useState(true)
 
-  const openModal = (e) => {
-    setShowModal(prev => !prev);
-    setWhichModal(e.target.name)
-  }
+const openModal = (e) => {
+  setShowModal(prev => !prev);
+  setWhichModal(e.target.name)
+}
 
   return (
     <>
     <Modal showModal={showModal} setShowModal={setShowModal} whichModal={whichModal} setWhichModal={setWhichModal}></Modal>
-      <Nav>
+    <Nav>
       <NavbarContainer>
         <NavMenu>
           <NavItem>
-            <Currency>
-              <span>USD</span>
+          <Currency onClick={() => {
+              setOpen(!open)
+            }}>
+              <span>{currency}</span>
+              {!open ? <Arrdown/> : <Arrup/>}
             </Currency>
+            {open && <Dropdown>
+              <CurrencySpan onClick = {() => setCurrency('USD')}>USD</CurrencySpan>
+              <CurrencySpan onClick = {() => setCurrency('EUR')}>EUR</CurrencySpan>
+            </Dropdown>}
+            
           </NavItem>
           <NavItem>
             <NavLink onClick={openModal} name="login">Login</NavLink>
@@ -29,14 +40,14 @@ const Navbar = () => {
             <NavLink onClick={openModal} name="signup">Sign Up</NavLink>
           </NavItem>
           <NavItem>
-            <Mode></Mode>
+            {theme ? <MoonTheme onClick={()=>setTheme(!theme)}/> : <SunTheme onClick={()=>setTheme(!theme)}/>}
           </NavItem>
-        </NavMenu>
+        </NavMenu> 
       </NavbarContainer>
     </Nav>
-    </>
+      
+      </>
   )
-
 }
 
 export default Navbar

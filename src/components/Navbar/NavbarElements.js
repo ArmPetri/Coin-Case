@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import {FaSun} from 'react-icons/fa'
+import {FaMoon} from 'react-icons/fa'
+import {RiArrowDownSFill} from 'react-icons/ri'
+import {RiArrowUpSFill} from 'react-icons/ri'
+
 
 export const Nav = styled.nav `
   height: 60px;
@@ -29,6 +33,10 @@ export const NavItem = styled.li `
   padding-left:20px;
   cursor: pointer;
   color: #E5ECFA;
+
+  &:last-of-type {
+    padding-top: 0.2rem;
+  }
 `
 
 export const NavLink = styled(Link) `
@@ -48,23 +56,27 @@ export const Currency = styled.a `
   padding: 10px;
   border: none;
 
-
   &:hover {
 
     color: #4C7CE0;
   }
-
-  
 `
 
-
-export const Mode = styled(FaSun) `
+export const SunTheme = styled(FaSun) `
   color: #E5ECFA
+  width: 80%;
+  height: 80%;
+`
+
+export const MoonTheme = styled(FaMoon) `
+  color: #E5ECFA
+  width: 80%;
+  height: 80%;
 `
 
 export const Dropdown = styled.div `
-  width: 50px;
-  height: 50px;
+  width: 90px;
+  height: 75px;
   position: absolute;
   border: 1px solid #E5ECFA;
   display: flex;
@@ -72,22 +84,24 @@ export const Dropdown = styled.div `
   padding: 5px;
   justify-content: center;
   align-items: center;
-  background: grey;
+  background: #000615;
   // opacity: 0.9;
   border-radius: 15%;
   text-align:center;
 `
+
 export const CurrencySpan = styled.span `
-  padding: 5x;
+  padding: 5px;
   width: 100%;
 
-
-
-   &:hover {
-    color: #4C7CE0;
-    // background: white;
-    width: 50px;
-    height:25px;
-    border-radius 5px;
-   }
+ &:hover {
+  color: #4C7CE0;
+ }
 ` 
+
+export const Arrdown = styled(RiArrowDownSFill) `
+
+`
+export const Arrup = styled(RiArrowUpSFill) `
+
+`
