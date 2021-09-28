@@ -17,11 +17,11 @@ const Footer = () => {
     <FooterWrapper>
       <FooterContainer>
         <Description>
-          <p>CryptApp provides a fundamental analysis of the crypto market. In addition to tracking price, volume and market capitalization, CoinGecko tracks community growth, open-source code development, major events and on-chain metrics.</p>
-          <p>© 2021 CryptApp. All Rights Reserved.</p>
+          <p>Coincase provides a way to keep track of your profits, losses and portfolio valuation. </p>
+          <p>© 2021 Coincase. All Rights Reserved.</p>
         </Description>
         <LinksContainer>
-          <Title>Crypto App</Title>
+          <Title>Coincase</Title>
           <Links>About Us</Links>
           <Links>Methodology</Links>
           <Links>Careers</Links>
