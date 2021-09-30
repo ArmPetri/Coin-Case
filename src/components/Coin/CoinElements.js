@@ -10,6 +10,7 @@ export const CoinRow = styled.tr `
   justify-content:space-between;
   align-items:center;
 `
+
 export const CoinData = styled.td `
   display:flex;
   justify-content: space-evenly;
@@ -33,21 +34,35 @@ export const CoinData = styled.td `
     width: 30%;
   } 
 `
+
+export const Star = styled.img `
+  fill: yellow;
+`
 export const MarketCapRank = styled.p `
 
 `
 export const CoinLogo = styled.img `
-
+  width:16px;
+  height:16px;
 `
 export const Name = styled.p `
-
+  color:#E5ECFA;
+  // border: 1px solid red;
+  width:40%;
+  text-align:left;
 `
 export const Symbol = styled.p `
-
+  text-transform: uppercase;
+  text-align: left;
+  width: 40%;
 `
-export const CurrentPrice = styled.p `
+export const PriceChange = styled.p `
 
 `
 export const MarketCap = styled.p `
+
+`
+
+export const CurrentPrice = styled.p `
 
 `

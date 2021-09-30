@@ -3,32 +3,41 @@ import StarIconYellow from '../../images/Star_yellow.svg'
 import {
   CoinRow,
   CoinData,
+  Star,
   MarketCapRank,
   CoinLogo,
   Name,
   Symbol,
   CurrentPrice,
+  PriceChange,
   MarketCap} from './CoinElements'
 
-const Coin = () => {
+const Coin = ({marketCapRank,
+  logo,
+  name,
+  symbol,
+  price,
+  priceChange,
+  marketCap}) => {
   return (
     <CoinRow>
       <CoinData>
           <img src={StarIconYellow} alt="" />
-          <MarketCapRank>1</MarketCapRank>
+          <MarketCapRank>{marketCapRank}</MarketCapRank>
         </CoinData>
         <CoinData>
-          <CoinLogo></CoinLogo>
-          <Name>BTC</Name>
-          <Symbol>btc</Symbol>
+          <CoinLogo src={logo}></CoinLogo>
+          <Name>{name}</Name>
+          <Symbol>{symbol}</Symbol>
         </CoinData>
         <CoinData>
-          <CurrentPrice>1$</CurrentPrice>
+          <CurrentPrice>{price}$</CurrentPrice>
         </CoinData>
         <CoinData>
+          <PriceChange>{priceChange}</PriceChange>
         </CoinData>
         <CoinData>
-          <MarketCap>12000$</MarketCap>
+          <MarketCap>{marketCap}</MarketCap>
         </CoinData>
     </CoinRow>
   )
