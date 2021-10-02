@@ -24,7 +24,7 @@ const MainNavbar = () => {
             <MainNavLink>News</MainNavLink>
           </MainNavItem>
           <MainNavItem>
-            <MainNavLink>Converter</MainNavLink>
+            <MainNavLink to='/converter'>Converter</MainNavLink>
           </MainNavItem>
           <MainNavItem>
             <MainNavLink>Market Analysis</MainNavLink>
