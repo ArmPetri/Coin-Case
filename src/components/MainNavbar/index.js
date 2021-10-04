@@ -6,16 +6,16 @@ const MainNavbar = () => {
   return (
     <MainNav>
       <MainNavContainer>
-        <NavLogo></NavLogo>
+        <NavLogo to='/'></NavLogo>
         <MainNavMenu>
           <MainNavItem>
-            <MainNavLink to='/' >Home</MainNavLink>
+            <MainNavLink to='/'>Home</MainNavLink>
           </MainNavItem>
           <MainNavItem>
             <MainNavLink>Market</MainNavLink>
           </MainNavItem>
           <MainNavItem>
-            <MainNavLink>Portfolio</MainNavLink>
+            <MainNavLink to='/portfolio'>Portfolio</MainNavLink>
           </MainNavItem>
           <MainNavItem>
             <MainNavLink>Alerts</MainNavLink>
