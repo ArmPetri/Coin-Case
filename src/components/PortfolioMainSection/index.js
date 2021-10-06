@@ -1,6 +1,7 @@
 import React from 'react'
 import {Section, SectionContainer, SectionTitle, Utilities, Cards, AddCoinBtn, SectionTable, TableHead, TableRow, TableH, TableBody} from './PortfolioMainSectionElements'
 import Card from '../Card/index'
+import PortfolioCoin from '../PortfolioCoin/index'
 
 const PortfolioMainSection = () => {
   return (
@@ -30,7 +31,7 @@ const PortfolioMainSection = () => {
           </TableRow>
         </TableHead>
         <TableBody >
-
+          <PortfolioCoin marketCapRank="1" logo="logo" name="Bitcoin" price="120$" symbol="BTC"  priceChange="2%"  marketCap='3412124'></PortfolioCoin>
         </TableBody>
       </SectionTable>
     </SectionContainer>
