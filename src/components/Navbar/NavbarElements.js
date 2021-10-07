@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
 import {FaSun} from 'react-icons/fa'
 import {FaMoon} from 'react-icons/fa'
 import {RiArrowDownSFill} from 'react-icons/ri'
@@ -39,7 +38,7 @@ export const NavItem = styled.li `
   }
 `
 
-export const NavLink = styled(Link) `
+export const NavLink = styled.a `
   color: #E5ECFA;
   text-decoration:none;
   transition: color ease-in 0.02s;

@@ -40,7 +40,7 @@ const openModal = (e) => {
             <NavLink onClick={openModal} name="signup">Sign Up</NavLink>
           </NavItem>
           <NavItem>
-            {theme ? <MoonTheme onClick={()=>setTheme(!theme)}/> : <SunTheme onClick={()=>setTheme(!theme)}/>}
+            {/* {theme ? <MoonTheme onClick={()=>setTheme(!theme)}/> : <SunTheme onClick={()=>setTheme(!theme)}/>} */}
           </NavItem>
         </NavMenu> 
       </NavbarContainer>
