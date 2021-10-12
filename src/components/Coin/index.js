@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import {Context} from '../../context/coinMarketsContext';
 import StarIconYellow from '../../images/Star_yellow.svg'
 import {
   CoinRow,
@@ -19,6 +20,9 @@ const Coin = ({marketCapRank,
   price,
   priceChange,
   marketCap}) => {
+
+    const {currency} = useContext(Context)
+
   return (
     <CoinRow>
       <CoinData>
@@ -31,7 +35,7 @@ const Coin = ({marketCapRank,
           <Symbol>{symbol}</Symbol>
         </CoinData>
         <CoinData>
-          <CurrentPrice>{price}$</CurrentPrice>
+          <CurrentPrice>{currency==="usd" ? '$' : '€'} {price}</CurrentPrice>
         </CoinData>
         <CoinData>
           <PriceChange>{priceChange}</PriceChange>

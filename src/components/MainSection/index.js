@@ -8,9 +8,7 @@ import {Context} from '../../context/coinMarketsContext'
 
 const MainSection = () => {
   const [open, setOpen] = useState(false)
-  const [currency, setCurrency] = useState('USD')
-
-  const {coins} = useContext(Context)
+  const {coins, whichCurrency, currency} = useContext(Context)
 
   return (
     <Section>
@@ -21,12 +19,12 @@ const MainSection = () => {
             <Currency onClick={() => {
                 setOpen(!open)
               }}>
-                <span>{currency}</span>
-                {!open ? <Arrdown/> : <Arrup/>}
+                <span>{(currency).toUpperCase()}</span>
+              {!open ? <Arrdown/> : <Arrup/>}
             </Currency>
             {open && <Dropdown>
-              <CurrencySpan onClick = {() => setCurrency('USD')}>USD</CurrencySpan>
-              <CurrencySpan onClick = {() => setCurrency('EUR')}>EUR</CurrencySpan>
+              <CurrencySpan onClick = {() => whichCurrency('usd')}>USD</CurrencySpan>
+              <CurrencySpan onClick = {() => whichCurrency('eur')}>EUR</CurrencySpan>
             </Dropdown>}
           </CurrencyButton>
           <PortfolioLink>
@@ -47,7 +45,7 @@ const MainSection = () => {
           <TableBody>
           {coins.map(coin => {
             return (
-              <Coin key={coin.id} coin={coin} name={coin.name} marketCapRank={coin.market_cap_rank} logo={coin.image} symbol={coin.symbol} price={coin.current_price} priceChange={coin.price_change_percentage_24h} marketCap={coin.market_cap}></Coin>
+              <Coin key={coin.id} coin={coin} name={coin.name} marketCapRank={coin.market_cap_rank} logo={coin.image} symbol={coin.symbol} price={coin.current_price} priceChange={coin.price_change_percentage_24h} marketCap={coin.market_cap} currency={currency}></Coin>
             )
           })}
           </TableBody>

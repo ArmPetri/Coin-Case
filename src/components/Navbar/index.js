@@ -1,13 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {Nav, NavbarContainer, NavMenu, NavItem, NavLink, SunTheme, MoonTheme, Dropdown, Arrdown, Arrup, Currency, CurrencySpan} from './NavbarElements'
 import Modal from '../Modal'
+import {Context} from '../../context/coinMarketsContext';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false)
-  const [currency, setCurrency] = useState('USD')
   const [showModal, setShowModal] = useState(false)
   const [whichModal, setWhichModal] = useState('')
   const [theme, setTheme] = useState(true)
+  const {whichCurrency, currency} = useContext(Context)
 
 const openModal = (e) => {
   setShowModal(prev => !prev);
@@ -24,12 +25,12 @@ const openModal = (e) => {
           <Currency onClick={() => {
               setOpen(!open)
             }}>
-              <span>{currency}</span>
+               <span>{(currency).toUpperCase()}</span>
               {!open ? <Arrdown/> : <Arrup/>}
             </Currency>
             {open && <Dropdown>
-              <CurrencySpan onClick = {() => setCurrency('USD')}>USD</CurrencySpan>
-              <CurrencySpan onClick = {() => setCurrency('EUR')}>EUR</CurrencySpan>
+              <CurrencySpan onClick = {() => whichCurrency('usd')}>USD</CurrencySpan>
+              <CurrencySpan onClick = {() => whichCurrency('eur')}>EUR</CurrencySpan>
             </Dropdown>}
             
           </NavItem>
@@ -40,7 +41,7 @@ const openModal = (e) => {
             <NavLink onClick={openModal} name="signup">Sign Up</NavLink>
           </NavItem>
           <NavItem>
-            {/* {theme ? <MoonTheme onClick={()=>setTheme(!theme)}/> : <SunTheme onClick={()=>setTheme(!theme)}/>} */}
+            {theme ? <MoonTheme onClick={()=>setTheme(!theme)}/> : <SunTheme onClick={()=>setTheme(!theme)}/>}
           </NavItem>
         </NavMenu> 
       </NavbarContainer>
