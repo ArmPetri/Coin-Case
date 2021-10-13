@@ -1,5 +1,6 @@
 import React, {useContext} from 'react'
 import {Context} from '../../context/coinMarketsContext';
+import StarIcon from '../../images/Star.svg'
 import StarIconYellow from '../../images/Star_yellow.svg'
 import {
   CoinRow,
@@ -13,7 +14,8 @@ import {
   PriceChange,
   MarketCap} from './CoinElements'
 
-const Coin = ({marketCapRank,
+const Coin = ({coin, 
+  marketCapRank,
   logo,
   name,
   symbol,
@@ -21,12 +23,26 @@ const Coin = ({marketCapRank,
   priceChange,
   marketCap}) => {
 
-    const {currency} = useContext(Context)
+    const {portfolioCoins, addToPorfolio, removeFromPortfolio, currency} = useContext(Context)
+
+    function starTheIcon() {
+      const alreadyInPortfolio = portfolioCoins.some(portfolioCoin => 
+        portfolioCoin.id === coin.id,
+        )
+      if(alreadyInPortfolio) {
+        return <Star onClick={()=> {
+          removeFromPortfolio(coin.id)}} src={StarIconYellow}></Star>
+    } 
+        return <Star onClick={()=> {
+          addToPorfolio(coin)}} src={StarIcon}></Star>
+    }
+
+    console.log(portfolioCoins)
 
   return (
     <CoinRow>
       <CoinData>
-          <img src={StarIconYellow} alt="" />
+        {starTheIcon()}
           <MarketCapRank>{marketCapRank}</MarketCapRank>
         </CoinData>
         <CoinData>
