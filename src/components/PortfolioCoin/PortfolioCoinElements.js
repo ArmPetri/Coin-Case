@@ -46,12 +46,14 @@ export const CoinData = styled.td `
 `
 
 export const Star = styled.img `
+  fill: yellow;
 `
 export const MarketCapRank = styled.p `
 
 `
 export const CoinLogo = styled.img `
-
+  width:16px;
+  height:16px;
 `
 export const Name = styled.p `
   color:#E5ECFA;

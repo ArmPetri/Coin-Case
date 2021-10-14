@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import {Context} from '../../context/coinMarketsContext';
 import {
   CoinRow,
   CoinData,
+  Star,
   MarketCapRank,
   CoinLogo,
   Name,
@@ -21,6 +23,7 @@ import {
   import StarIconYellow from '../../images/Star_yellow.svg'
 
 const PortfolioCoin = ({
+  coin,
   marketCapRank,
   name,
   price,
@@ -29,16 +32,29 @@ const PortfolioCoin = ({
   priceChange,
   marketCap}) => {
     const [whichTooltip, setWhichTooltip] = useState('')
+    const {portfolioCoins, addToPorfolio, removeFromPortfolio} = useContext(Context)
+    
+    function starTheIcon() {
+      const alreadyInPortfolio = portfolioCoins.some(portfolioCoin => 
+        portfolioCoin.id === coin.id,
+        )
+      if(alreadyInPortfolio) {
+        return <Star onClick={()=> {
+          removeFromPortfolio(coin.id)}} src={StarIconYellow}></Star>
+    } 
+        return <Star onClick={()=> {
+          addToPorfolio(coin)}} src={StarIcon}></Star>
+    }
 
   return (
     <>
       <CoinRow>
         <CoinData>
-          <img src={StarIconYellow} alt="" />
+          {starTheIcon()}
           <MarketCapRank>{marketCapRank}</MarketCapRank>
         </CoinData>
         <CoinData>
-          <CoinLogo></CoinLogo>
+          <CoinLogo src={logo}></CoinLogo>
           <Name>{name}</Name>
           <Symbol>{symbol}</Symbol>
         </CoinData>

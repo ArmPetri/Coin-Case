@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Section, SectionContainer, SectionTitle, Utilities, Cards, AddCoinBtn, SectionTable, TableHead, TableRow, TableH, TableBody} from './PortfolioMainSectionElements'
 import Card from '../Card/index'
 import PortfolioCoin from '../PortfolioCoin/index'
+import {Context} from '../../context/coinMarketsContext'
 
 const PortfolioMainSection = () => {
+  const {portfolioCoins} = useContext(Context)
   return (
   <Section>
     <SectionContainer>
@@ -31,7 +33,11 @@ const PortfolioMainSection = () => {
           </TableRow>
         </TableHead>
         <TableBody >
-          <PortfolioCoin marketCapRank="1" logo="logo" name="Bitcoin" price="120$" symbol="BTC"  priceChange="2%"  marketCap='3412124'></PortfolioCoin>
+          {portfolioCoins.map(coin => {
+              return (
+            <PortfolioCoin key={coin.id} coin={coin} name={coin.name} marketCapRank={coin.market_cap_rank} logo={coin.image} symbol={coin.symbol} price={coin.current_price} priceChange={coin.price_change_percentage_24h} marketCap={coin.market_cap}></PortfolioCoin>
+              )
+            })}
         </TableBody>
       </SectionTable>
     </SectionContainer>
