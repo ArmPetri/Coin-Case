@@ -9,6 +9,8 @@ import {
   Name,
   Symbol,
   CurrentPrice,
+  PriceChangePositive,
+  PriceChangeNegative,
   MarketCap, 
   Holdings, 
   Plus,
@@ -62,10 +64,10 @@ const PortfolioCoin = ({
           <CurrentPrice>${price}</CurrentPrice>
         </CoinData>
         <CoinData>
-          {priceChange}
+          {priceChange > 0 ? (<PriceChangePositive>{priceChange.toFixed(2)}%</PriceChangePositive>) : (<PriceChangeNegative>{priceChange.toFixed(2)}%</PriceChangeNegative>) }
         </CoinData>
         <CoinData>
-          <MarketCap>{marketCap}</MarketCap>
+          <MarketCap>${marketCap.toLocaleString()}</MarketCap>
         </CoinData>
         <CoinData>
           <Holdings>1324124</Holdings>

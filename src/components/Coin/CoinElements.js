@@ -56,8 +56,11 @@ export const Symbol = styled.p `
   text-align: left;
   width: 40%;
 `
-export const PriceChange = styled.p `
-
+export const PriceChangePositive = styled.p `
+  color: #44D400;
+  `
+  export const PriceChangeNegative = styled.p `
+  color: #D40044;
 `
 export const MarketCap = styled.p `
 

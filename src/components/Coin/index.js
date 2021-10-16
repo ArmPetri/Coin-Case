@@ -11,7 +11,8 @@ import {
   Name,
   Symbol,
   CurrentPrice,
-  PriceChange,
+  PriceChangePositive,
+  PriceChangeNegative,
   MarketCap} from './CoinElements'
 
 const Coin = ({coin, 
@@ -37,8 +38,6 @@ const Coin = ({coin,
           addToPorfolio(coin)}} src={StarIcon}></Star>
     }
 
-    console.log(portfolioCoins)
-
   return (
     <CoinRow>
       <CoinData>
@@ -54,10 +53,10 @@ const Coin = ({coin,
           <CurrentPrice>{currency==="usd" ? '$' : '€'} {price}</CurrentPrice>
         </CoinData>
         <CoinData>
-          <PriceChange>{priceChange}</PriceChange>
+        {priceChange > 0 ? (<PriceChangePositive>{priceChange.toFixed(2)}%</PriceChangePositive>) : (<PriceChangeNegative>{priceChange.toFixed(2)}%</PriceChangeNegative>) }
         </CoinData>
         <CoinData>
-          <MarketCap>{marketCap}</MarketCap>
+          <MarketCap>${marketCap.toLocaleString()}</MarketCap>
         </CoinData>
     </CoinRow>
   )
