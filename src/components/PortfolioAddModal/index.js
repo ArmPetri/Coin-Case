@@ -12,6 +12,13 @@ const Modal = ({showModal, setShowModal, symbol}) => {
     Quantity: '',
     Total: 0
   })
+  const [sell, setSell] = useState({
+    Coin: '',
+    Type: '',
+    Price: '',
+    Quantity: '',
+    Total: 0
+  })
 
   const {addTransaction} = useContext(Context)
 
@@ -22,14 +29,24 @@ const Modal = ({showModal, setShowModal, symbol}) => {
    return parseFloat((buy.Price * buy.Quantity).toFixed(6));
   }
 
+  let selltotal = () => {
+    return parseFloat((sell.Price * sell.Quantity).toFixed(6));
+   }
+
 useEffect(() => {
   setBuy({...buy, Total: buytotal()})
 }, [buy.Price, buy.Quantity, buy.Total])
+
+useEffect(() => {
+  setSell({...sell, Total: selltotal()})
+}, [sell.Price, sell.Quantity, sell.Total])
+
 
   const handleChange = (e) => {
     let {name, value} = e.target;
 
           buyTab && setBuy({...buy, Coin:symbol, Type:tab, [name]:value, Total: buytotal() })
+          sellTab && setSell({...sell, Coin:symbol, Type:tab, [name]:value, Total: selltotal() })
         }
                             
   function handleSubmit(e){
@@ -37,6 +54,8 @@ useEffect(() => {
     
     if(buyTab) {
       addTransaction(buy);
+    } else {
+      addTransaction(sell);
     }
   }
 
@@ -61,7 +80,13 @@ useEffect(() => {
         </>
         }
         {sellTab && 
-        <h3>Under Construction</h3>
+          <>
+            <FormLabel>Price Per Coin<FormInput type='number' name='Price' placeholder='0' value={sell.Price} onChange={handleChange}></FormInput></FormLabel>
+            <FormLabel>Quantity
+              <CoinQuantity>
+              <QuantityInput type='number' name='Quantity' placeholder="0" value={sell.Quantity} onChange={handleChange}></QuantityInput><CoinSymbol>{symbol}</CoinSymbol></CoinQuantity></FormLabel>
+            <FormLabel>Total Received<FormInput disabled type='number' className="grey"  name='Total' placeholder='0' value={selltotal()} onChange={handleChange}></FormInput></FormLabel> 
+          </>
         }
         <BtnWrap>
           <CancelBtn onClick={() => setShowModal(prev => !prev)}>Cancel</CancelBtn>
