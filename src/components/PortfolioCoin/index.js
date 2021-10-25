@@ -22,6 +22,7 @@ import {
 } from './PortfolioCoinElements'
 
   import PortfolioAddModal from '../PortfolioAddModal'
+  import PortfolioViewModal from '../PortfolioViewModal'
 
   import StarIcon from '../../images/Star.svg'
   import StarIconYellow from '../../images/Star_yellow.svg'
@@ -60,6 +61,7 @@ const PortfolioCoin = ({
   return (
     <>
     {whichModal==="addTransaction" && <PortfolioAddModal showModal={showModal} setShowModal={setShowModal} symbol={symbol}></PortfolioAddModal>}
+    {whichModal==="viewTransactions" && <PortfolioViewModal showModal={showModal} setShowModal={setShowModal} price={price} coin={symbol}></PortfolioViewModal>}
       <CoinRow>
         <CoinData>
           {starTheIcon()}
@@ -98,7 +100,7 @@ const PortfolioCoin = ({
             { whichTooltip==="Add" && <TooltipText>Add Transaction</TooltipText>}
             </Tooltip>
             <Tooltip>
-            <Greater id="viewTransactions"
+            <Greater onClick={openModal} id="viewTransactions"
             onMouseOver={(e) => {
               if(e.target.id==="viewTransactions"){
                 setWhichTooltip('View')
