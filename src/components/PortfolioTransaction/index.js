@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {TransactionRow,
   TransactionData,
   Type,
@@ -11,10 +11,14 @@ import {TransactionRow,
   EditBtn,
   RemoveBtn} from './PortfolioTransactionElements'
 
-  const PortfolioTransaction = ({transaction, coin, type, 
+  import {Context} from '../../context/portfolioContext';
+
+  const PortfolioTransaction = ({transaction, index, coin, type, 
     price,
     quantity,
     total, currentPrice}) => {
+      const { removeTransaction } = useContext(Context)
+
       return (
         <TransactionRow>
           <TransactionData>
@@ -41,7 +45,7 @@ import {TransactionRow,
           </TransactionData>
           <TransactionData>
             <EditBtn></EditBtn>
-            <RemoveBtn></RemoveBtn>
+            <RemoveBtn onClick={() => removeTransaction(index)}></RemoveBtn>
           </TransactionData>
         </TransactionRow>
       )

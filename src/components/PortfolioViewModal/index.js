@@ -30,7 +30,7 @@ const Modal = ({showModal, setShowModal, price, coin}) => {
           {transactions.map((transaction) => {
             return (
               transaction.Coin === coin &&
-                <PortfolioTransaction transaction={transaction} coin={transaction.Coin} type={transaction.Type} price={transaction.Price} quantity={transaction.Quantity} total={transaction.Total} currentPrice={price}></
+                <PortfolioTransaction transaction={transaction} index={transaction.Index} coin={transaction.Coin} type={transaction.Type} price={transaction.Price} quantity={transaction.Quantity} total={transaction.Total} currentPrice={price}></
                PortfolioTransaction> 
             )
           })}
