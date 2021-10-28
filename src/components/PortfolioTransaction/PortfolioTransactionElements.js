@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { AiFillEdit } from "react-icons/ai";
+import { AiOutlineFileDone } from "react-icons/ai";
 import { FiTrash2 } from "react-icons/fi";
 
 export const TransactionRow = styled.tr ` 
@@ -46,16 +47,31 @@ export const Type = styled.p `
   color: white;
   `
 
-  export const Price = styled.p `
-
+  export const Price = styled.input `
+  &:enabled {
+    background: white;
+    color: #47526A;
+    text-indent: 1rem;
+  }
   `
 
-export const BuyQuantity = styled.p ` 
-    color: #44D400;
+export const BuyQuantity = styled.input ` 
+  color: #44D400;
+  &:enabled {
+    background: #E5ECFA;
+    width: auto;
+    color: #47526A;
+    text-indent: 1rem;
+  }
   `
 
-export const SellQuantity = styled.p ` 
-    color: #D40044;
+export const SellQuantity = styled.input ` 
+  color: #D40044;
+  &:enabled {
+    background: #E5ECFA;
+    color: #47526A;
+    text-indent: 1rem;
+  }
   `
 
 export const Cost = styled.p ` 
@@ -76,6 +92,14 @@ export const Proceeds = styled.p `
     &:hover {
       color: #4C7CE0;
     }
+  `
+
+  export const DoneBtn = styled(AiOutlineFileDone) `
+  color: #E5ECFA;
+
+  &:hover {
+    color: #4C7CE0;
+  }
   `
 
   export const RemoveBtn = styled(FiTrash2) ` 

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import {TransactionRow,
   TransactionData,
   Type,
@@ -9,6 +9,7 @@ import {TransactionRow,
   Proceeds,
   PNL,
   EditBtn,
+  DoneBtn,
   RemoveBtn} from './PortfolioTransactionElements'
 
   import {Context} from '../../context/portfolioContext';
@@ -17,7 +18,12 @@ import {TransactionRow,
     price,
     quantity,
     total, currentPrice}) => {
+      const [enabled, setEnabled] = useState(false)
       const { removeTransaction } = useContext(Context)
+
+      function editing() {
+        setEnabled(!enabled)
+      }
 
       return (
         <TransactionRow>
@@ -25,13 +31,19 @@ import {TransactionRow,
             <Type>{type}</Type>
           </TransactionData>
           <TransactionData>
-            <Price>{price}</Price> 
+          {!enabled ? <Price name="Price" disabled value={price}></Price> : <Price name="Price" type="number" value={price}></Price>}
           </TransactionData>
           <TransactionData>
-            {
+          {
+            !enabled ?
             type === "Buy" ? 
-            (<BuyQuantity>{quantity}</BuyQuantity>) :  
-            (<SellQuantity>{quantity}</SellQuantity>)  
+            (<BuyQuantity name="Quantity" disabled value={"+" + quantity}></BuyQuantity>) :  
+            (<SellQuantity name="Quantity" disabled value={"-" + quantity}></SellQuantity>)  
+            :
+            enabled &&
+            type === "Buy" ? 
+            (<BuyQuantity name="Quantity" type="number"  value={quantity}></BuyQuantity>) :  
+            (<SellQuantity name="Quantity" type="number" value={quantity}></SellQuantity>)  
           }
           </TransactionData>
           <TransactionData>
@@ -44,7 +56,8 @@ import {TransactionRow,
             <PNL></PNL>
           </TransactionData>
           <TransactionData>
-            <EditBtn></EditBtn>
+          {enabled && <DoneBtn onClick={() => editing()}></DoneBtn>}
+        {!enabled && <EditBtn onClick={() => setEnabled(!enabled)}></EditBtn>}
             <RemoveBtn onClick={() => removeTransaction(index)}></RemoveBtn>
           </TransactionData>
         </TransactionRow>
