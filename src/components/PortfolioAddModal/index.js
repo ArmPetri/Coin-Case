@@ -6,6 +6,7 @@ import { Overlay, Form, CloseBtn, FormTitle, FormLabel, FormInput, SubmitBtn, Ta
 const Modal = ({showModal, setShowModal, symbol}) => {
   const [tab, setTab] = useState('Buy');
   const [buy, setBuy] = useState({
+    Index: Math.random()*100,
     Coin: '',
     Type: '',
     Price: '',
@@ -13,6 +14,7 @@ const Modal = ({showModal, setShowModal, symbol}) => {
     Total: 0
   })
   const [sell, setSell] = useState({
+    Index: Math.random()*100,
     Coin: '',
     Type: '',
     Price: '',
@@ -53,8 +55,10 @@ useEffect(() => {
     e.preventDefault();
     
     if(buyTab) {
+       setBuy({...buy, Index: Math.random(Date.now() + buy.Index+1)*100})
       addTransaction(buy);
     } else {
+      setSell({...sell, Index: Math.random(Date.now() + sell.Index+2)*100})
       addTransaction(sell);
     }
   }
