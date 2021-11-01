@@ -18,11 +18,28 @@ import {TransactionRow,
     price,
     quantity,
     total, currentPrice}) => {
-      const [enabled, setEnabled] = useState(false)
+      const [enabled, setEnabled] = useState(false)    
+      const [buy, setBuy] = useState({
+        Price: price,
+        Quantity: quantity,
+        Total: total
+      })
+      const [sell, setSell] = useState({
+        Price: price,
+        Quantity: quantity,
+        Total: total
+      })
       const { removeTransaction } = useContext(Context)
 
       function editing() {
         setEnabled(!enabled)
+      }
+
+      const handleChange = (e) => {
+        let {name, value} = e.target;
+  
+        setBuy({...buy, [name]:value})
+        setSell({...sell, [name]:value})
       }
 
       return (
@@ -31,19 +48,21 @@ import {TransactionRow,
             <Type>{type}</Type>
           </TransactionData>
           <TransactionData>
-          {!enabled ? <Price name="Price" disabled value={price}></Price> : <Price name="Price" type="number" value={price}></Price>}
+          {
+            !enabled ? <Price name="Price" disabled value={buy.Price}></Price> : <Price name="Price" type="number" onChange={handleChange} value={buy.Price}></Price>
+          }
           </TransactionData>
           <TransactionData>
           {
             !enabled ?
             type === "Buy" ? 
-            (<BuyQuantity name="Quantity" disabled value={"+" + quantity}></BuyQuantity>) :  
-            (<SellQuantity name="Quantity" disabled value={"-" + quantity}></SellQuantity>)  
+            (<BuyQuantity name="Quantity" disabled value={"+" + buy.Quantity}></BuyQuantity>) :  
+            (<SellQuantity name="Quantity" disabled value={"-" + sell.Quantity}></SellQuantity>)  
             :
             enabled &&
             type === "Buy" ? 
-            (<BuyQuantity name="Quantity" type="number"  value={quantity}></BuyQuantity>) :  
-            (<SellQuantity name="Quantity" type="number" value={quantity}></SellQuantity>)  
+            (<BuyQuantity name="Quantity" type="number" onChange={handleChange} value={buy.Quantity}></BuyQuantity>) :  
+            (<SellQuantity name="Quantity" type="number" onChange={handleChange} value={sell.Quantity}></SellQuantity>)  
           }
           </TransactionData>
           <TransactionData>
