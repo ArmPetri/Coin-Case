@@ -42,10 +42,20 @@ import {TransactionRow,
         setSell({...sell, [name]:value})
       }
 
+      const Tab = type === "Buy" ? "#44D400" : "#D40044"
+
+      let buytotal = () => {
+        return parseFloat((buy.Price * buy.Quantity).toFixed(6));
+       }
+     
+      let selltotal = () => {
+        return parseFloat((sell.Price * sell.Quantity).toFixed(6));
+       }
+
       return (
         <TransactionRow>
           <TransactionData>
-            <Type>{type}</Type>
+            <Type type={Tab}>{type}</Type>
           </TransactionData>
           <TransactionData>
           {
@@ -66,10 +76,10 @@ import {TransactionRow,
           }
           </TransactionData>
           <TransactionData>
-            <Cost>{type === "Buy" ? total : "-"}</Cost>
+            <Cost name="Total">{type === "Buy" ? "$" + buytotal() : "-"}</Cost>
           </TransactionData>
           <TransactionData>
-            <Proceeds>{type === "Sell" ? total : "-"}</Proceeds>
+            <Proceeds>{type === "Sell" ? "$" + selltotal() : "-"}</Proceeds>
           </TransactionData>
           <TransactionData>
             <PNL></PNL>

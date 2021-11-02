@@ -44,7 +44,7 @@ export const TransactionData = styled.td `
 `
 
 export const Type = styled.p ` 
-  color: white;
+  color: ${props => props.type}
   `
 
   export const Price = styled.input `
