@@ -83,7 +83,7 @@ export const Proceeds = styled.p `
   `
 
   export const PNL = styled.p ` 
-
+  color: ${props => props.type}
   `
 
   export const EditBtn = styled(AiFillEdit) ` 

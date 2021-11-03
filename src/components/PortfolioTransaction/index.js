@@ -51,6 +51,11 @@ import {TransactionRow,
       let selltotal = () => {
         return parseFloat((sell.Price * sell.Quantity).toFixed(6));
        }
+       
+
+     let profitandloss = () => {
+      return (quantity * currentPrice) - total;
+    }
 
       return (
         <TransactionRow>
@@ -82,7 +87,7 @@ import {TransactionRow,
             <Proceeds>{type === "Sell" ? "$" + selltotal() : "-"}</Proceeds>
           </TransactionData>
           <TransactionData>
-            <PNL></PNL>
+            <PNL type={type === "Buy" ? (profitandloss() > 0 ? "#44D400" : "#D40044") : ""}>{type === "Buy" ? ((profitandloss() > 0 ? "+" : "-") + "$" + Math.abs(parseFloat(profitandloss().toFixed(2)))) : "-"}</PNL>
           </TransactionData>
           <TransactionData>
           {enabled && <DoneBtn onClick={() => editing()}></DoneBtn>}
