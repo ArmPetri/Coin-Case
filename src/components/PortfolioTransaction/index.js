@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import {TransactionRow,
   TransactionData,
   Type,
@@ -29,9 +29,12 @@ import {TransactionRow,
         Quantity: quantity,
         Total: total
       })
-      const { removeTransaction } = useContext(Context)
+      const [updatedTransaction, setUpdatedTransaction] = useState({transaction})
 
-      function editing() {
+      const { editTransaction, removeTransaction } = useContext(Context)
+
+      function editing(index, updatedTransaction) {
+        editTransaction(index, updatedTransaction)
         setEnabled(!enabled)
       }
 
@@ -56,6 +59,16 @@ import {TransactionRow,
      let profitandloss = () => {
       return (quantity * currentPrice) - total;
     }
+
+    useEffect(() => {
+      setBuy({...buy, Total: buytotal()})
+      setUpdatedTransaction({...transaction, Price: buy.Price, Quantity: buy.Quantity, Total:buy.Total})
+    }, [buy.Price, buy.Quantity, buy.Total])
+    
+    useEffect(() => {
+      setSell({...sell, Total: selltotal()})
+      setUpdatedTransaction({...transaction, Price: sell.Price, Quantity: sell.Quantity, Total:sell.Total})
+    }, [sell.Price, sell.Quantity, sell.Total])
 
       return (
         <TransactionRow>
@@ -90,7 +103,7 @@ import {TransactionRow,
             <PNL type={type === "Buy" ? (profitandloss() > 0 ? "#44D400" : "#D40044") : ""}>{type === "Buy" ? ((profitandloss() > 0 ? "+" : "-") + "$" + Math.abs(parseFloat(profitandloss().toFixed(2)))) : "-"}</PNL>
           </TransactionData>
           <TransactionData>
-          {enabled && <DoneBtn onClick={() => editing()}></DoneBtn>}
+          {enabled && <DoneBtn onClick={() => editing(index, updatedTransaction)}></DoneBtn>}
         {!enabled && <EditBtn onClick={() => setEnabled(!enabled)}></EditBtn>}
             <RemoveBtn onClick={() => removeTransaction(index)}></RemoveBtn>
           </TransactionData>

@@ -9,6 +9,14 @@ const PortfolioContextProvider = ({children}) => {
       setTransactions(prevTransactions => [...prevTransactions, newTransactions])
     }
 
+    function editTransaction(index, updatedTransaction) {
+      setTransactions(prevTransactions => prevTransactions.filter
+        (transaction => 
+          transaction.Index !== index)
+          )
+      addTransaction(updatedTransaction)
+    }
+
     function removeTransaction(index) {
       setTransactions(prevTransactions => prevTransactions.filter
         (transaction => 
@@ -18,7 +26,7 @@ const PortfolioContextProvider = ({children}) => {
 
     console.log(transactions)
   return (
-    <Context.Provider value={{transactions, addTransaction, removeTransaction}}>
+    <Context.Provider value={{transactions, addTransaction, editTransaction, removeTransaction}}>
     {children}
   </Context.Provider>
   )
