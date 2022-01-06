@@ -1,7 +1,28 @@
-import React from 'react'
-import {MainNav, MainNavContainer, NavLogo, MainNavItem, MainNavLink, MainNavMenu, SearchBar} from './MainNavbarElements'
+import React, {useState, useContext} from 'react'
+import {MainNav, MainNavContainer, NavLogo, MainNavItem, MainNavLink, MainNavMenu, SearchBar, DropdownContent, DropdownItem} from './MainNavbarElements'
+import { Context } from '../../context/coinMarketsContext'
+import { CoinContext } from '../../context/coinPageContext'
 
 const MainNavbar = () => {
+  const [search, setSearch] = useState('')
+  const [filteredData, setFilteredData] = useState([]);
+
+  const {coins} = useContext(Context)
+  const {setCoinPageCoin} = useContext(CoinContext)
+
+  const handleChange = e => {
+    const searchCoin = e.target.value;
+    setSearch(searchCoin)
+    const newFilter = coins.filter((value) => {
+      return value.name.toLowerCase().includes(search.toLowerCase());
+    })
+
+    if (searchCoin === "") {
+      setFilteredData([]);
+    } else {
+      setFilteredData(newFilter);
+    }
+  }
 
   return (
     <MainNav>
@@ -15,10 +36,10 @@ const MainNavbar = () => {
             <MainNavLink>Market</MainNavLink>
           </MainNavItem>
           <MainNavItem>
-            <MainNavLink to='/portfolio'>Portfolio</MainNavLink>
+            <MainNavLink to='/coins'>Coins</MainNavLink>
           </MainNavItem>
           <MainNavItem>
-            <MainNavLink>Alerts</MainNavLink>
+            <MainNavLink to='/portfolio'>Portfolio</MainNavLink>
           </MainNavItem>
           <MainNavItem>
             <MainNavLink>News</MainNavLink>
@@ -30,7 +51,18 @@ const MainNavbar = () => {
             <MainNavLink>Market Analysis</MainNavLink>
           </MainNavItem>
         </MainNavMenu>
-      <SearchBar></SearchBar>
+        <SearchBar type="text" placeholder="Search Coin" onChange={handleChange} 
+      ></SearchBar>
+        {filteredData.length != 0 && <DropdownContent>
+          { filteredData.map((value) => {
+            return <DropdownItem to='/coins' onClick={() => {
+              setCoinPageCoin(value.id)
+              setFilteredData([])
+              }}>{value.name}</DropdownItem>
+            })
+          }
+        </DropdownContent>
+        }
       </MainNavContainer>
     </MainNav>
   )

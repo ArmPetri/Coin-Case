@@ -82,3 +82,38 @@ export const SearchBar = styled.input `
     border: 2px solid #0044D4; 
   }
 `
+export const DropdownContent = styled.div `
+background: #E5ECFA;
+position: absolute;
+border-radius: 5px;
+top: 8rem;
+right: 3rem;
+width: 350px;
+padding: 10px;
+color: black;
+overflow-y: scroll;
+height: auto;
+max-height: 50vh;
+box-shadow: 3px 3px 10px 6px rgba(255, 255, 255, 0.06);
+z-index: 1;
+display: flex;
+flex-direction: column;
+`
+
+export const DropdownItem = styled(Link) `
+  color: #000615;
+  text-decoration: none;
+  padding: 15px;  
+  cursor: pointer;
+  transition: all 0.1s;
+
+  img {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  &:hover {
+    background: grey;
+    border-radius: 5px;
+  }
+`
