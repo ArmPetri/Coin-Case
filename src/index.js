@@ -5,16 +5,19 @@ import App from './App';
 import {CoinMarketsContextProvider} from './context/coinMarketsContext'
 import {PortfolioContextProvider} from './context/portfolioContext'
 import { CoinPageContextProvider } from './context/coinPageContext'
+import {UserDataContextProvider} from './context/userDataContext'
 
 ReactDOM.render(
   <CoinMarketsContextProvider>
-    <PortfolioContextProvider>
-      <CoinPageContextProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>,
-      </CoinPageContextProvider>
-    </PortfolioContextProvider>
+    <UserDataContextProvider>
+      <PortfolioContextProvider>
+        <CoinPageContextProvider>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>,
+        </CoinPageContextProvider>
+      </PortfolioContextProvider>
+    </UserDataContextProvider>
   </CoinMarketsContextProvider>,
   document.getElementById('root')
 );

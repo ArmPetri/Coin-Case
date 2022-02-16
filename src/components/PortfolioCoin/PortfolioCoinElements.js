@@ -80,6 +80,7 @@ export const Holdings = styled.p `
 
 `
 export const PNL = styled.p `
+  color: ${props => props.type};
   width: 80%;
   text-align:center;
 `

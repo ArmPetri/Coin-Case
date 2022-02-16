@@ -12,12 +12,9 @@ import {TransactionRow,
   DoneBtn,
   RemoveBtn} from './PortfolioTransactionElements'
 
-  import {Context} from '../../context/portfolioContext';
+  import {PortfolioContext} from '../../context/portfolioContext';
 
-  const PortfolioTransaction = ({transaction, index, coin, type, 
-    price,
-    quantity,
-    total, currentPrice}) => {
+  const PortfolioTransaction = ({transaction, index, uid, type, price, quantity, total, currentPrice}) => {
       const [enabled, setEnabled] = useState(false)    
       const [buy, setBuy] = useState({
         Price: price,
@@ -29,24 +26,12 @@ import {TransactionRow,
         Quantity: quantity,
         Total: total
       })
+
       const [updatedTransaction, setUpdatedTransaction] = useState({transaction})
-
-      const { editTransaction, removeTransaction } = useContext(Context)
-
-      function editing(index, updatedTransaction) {
-        editTransaction(index, updatedTransaction)
-        setEnabled(!enabled)
-      }
-
-      const handleChange = (e) => {
-        let {name, value} = e.target;
-  
-        setBuy({...buy, [name]:value})
-        setSell({...sell, [name]:value})
-      }
-
+      const {editTransaction, removeTransaction} = useContext(PortfolioContext)
+      
       const Tab = type === "Buy" ? "#44D400" : "#D40044"
-
+     
       let buytotal = () => {
         return parseFloat((buy.Price * buy.Quantity).toFixed(6));
        }
@@ -55,10 +40,9 @@ import {TransactionRow,
         return parseFloat((sell.Price * sell.Quantity).toFixed(6));
        }
        
-
-     let profitandloss = () => {
-      return (quantity * currentPrice) - total;
-    }
+      let profitandloss = () => {
+        return (quantity * currentPrice) - total;
+      }
 
     useEffect(() => {
       setBuy({...buy, Total: buytotal()})
@@ -69,6 +53,18 @@ import {TransactionRow,
       setSell({...sell, Total: selltotal()})
       setUpdatedTransaction({...transaction, Price: sell.Price, Quantity: sell.Quantity, Total:sell.Total})
     }, [sell.Price, sell.Quantity, sell.Total])
+
+    const handleChange = (e) => {
+      let {name, value} = e.target;
+
+      setBuy({...buy, [name]:value})
+      setSell({...sell, [name]:value})
+    }
+
+    function editing(index, updatedTransaction) {
+      editTransaction(index, updatedTransaction)
+      setEnabled(!enabled)
+    }
 
       return (
         <TransactionRow>
@@ -103,9 +99,9 @@ import {TransactionRow,
             <PNL type={type === "Buy" ? (profitandloss() > 0 ? "#44D400" : "#D40044") : ""}>{type === "Buy" ? ((profitandloss() > 0 ? "+" : "-") + "$" + Math.abs(parseFloat(profitandloss().toFixed(2)))) : "-"}</PNL>
           </TransactionData>
           <TransactionData>
-          {enabled && <DoneBtn onClick={() => editing(index, updatedTransaction)}></DoneBtn>}
-        {!enabled && <EditBtn onClick={() => setEnabled(!enabled)}></EditBtn>}
-            <RemoveBtn onClick={() => removeTransaction(index)}></RemoveBtn>
+          {enabled && <DoneBtn onClick={() => editing(uid, updatedTransaction)}></DoneBtn>}
+          {!enabled && <EditBtn onClick={() => setEnabled(!enabled)}></EditBtn>}
+          <RemoveBtn onClick={() => removeTransaction(index, uid)}></RemoveBtn>
           </TransactionData>
         </TransactionRow>
       )

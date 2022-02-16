@@ -5,7 +5,6 @@ import Coin from '../Coin/index'
 
 import {Context} from '../../context/coinMarketsContext'
 
-
 const MainSection = () => {
   const [open, setOpen] = useState(false)
   const {coins, whichCurrency, currency} = useContext(Context)

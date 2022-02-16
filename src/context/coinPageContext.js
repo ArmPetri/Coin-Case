@@ -8,7 +8,7 @@ const CoinPageContextProvider = ({children}) => {
   const [coinData, setCoinData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+ useEffect(() => {
     async function gettingData () {
       setLoading(true)
         const controller = new AbortController();
@@ -28,7 +28,7 @@ const CoinPageContextProvider = ({children}) => {
 
 
   return (
-    <CoinContext.Provider value={{setCoinPageCoin, coinData, loading}}>{children}</CoinContext.Provider>
+    <CoinContext.Provider value={{coinPageCoin, setCoinPageCoin, coinData, loading}}>{children}</CoinContext.Provider>
   )
 }
 

@@ -56,7 +56,7 @@ export const FormInput = styled.input `
   background: #E5ECFA;
   border-radius: 5px;
   color:black;
-  text-align:center;
+  text-indent: 1rem;
   margin-top: 10px;
 
   transition: box-shadow 0.2s ease-in;

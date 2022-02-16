@@ -1,7 +1,6 @@
 import React, {useContext} from 'react'
 import {Context} from '../../context/coinMarketsContext';
-import StarIcon from '../../images/Star.svg'
-import StarIconYellow from '../../images/Star_yellow.svg'
+import {UserContext} from '../../context/userDataContext'
 import {
   CoinRow,
   CoinData,
@@ -14,6 +13,9 @@ import {
   PriceChangePositive,
   PriceChangeNegative,
   MarketCap} from './CoinElements'
+  
+  import StarIcon from '../../images/Star.svg'
+  import StarIconYellow from '../../images/Star_yellow.svg'
 
 const Coin = ({coin, 
   marketCapRank,
@@ -25,23 +27,35 @@ const Coin = ({coin,
   marketCap}) => {
 
     const {portfolioCoins, addToPorfolio, removeFromPortfolio, currency} = useContext(Context)
+    const {isLoggedIn, setShowModal} = useContext(UserContext)
 
     function starTheIcon() {
       const alreadyInPortfolio = portfolioCoins.some(portfolioCoin => 
         portfolioCoin.id === coin.id,
-        )
+      )
+
+      const theCoin = portfolioCoins.find(portfolioCoin => {
+        if(portfolioCoin.id === coin.id){
+          return portfolioCoin
+        } 
+      }
+    )
+
       if(alreadyInPortfolio) {
-        return <Star onClick={()=> {
-          removeFromPortfolio(coin.id)}} src={StarIconYellow}></Star>
-    } 
-        return <Star onClick={()=> {
-          addToPorfolio(coin)}} src={StarIcon}></Star>
+        return <Star onClick={(e)=> {
+          e.target.src = StarIcon
+          removeFromPortfolio(theCoin)}} src={StarIconYellow}></Star>
+      }
+        return <Star onClick={(e)=> {
+          e.target.src = StarIconYellow
+          addToPorfolio(coin.id)
+      }} src={StarIcon}></Star> 
     }
 
   return (
     <CoinRow>
       <CoinData>
-        {starTheIcon()}
+        {isLoggedIn ? starTheIcon() : <Star onClick={() =>  setShowModal(true)} src={StarIcon}></Star> }
           <MarketCapRank>{marketCapRank}</MarketCapRank>
         </CoinData>
         <CoinData>

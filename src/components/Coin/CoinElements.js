@@ -36,7 +36,9 @@ export const CoinData = styled.td `
 `
 
 export const Star = styled.img `
-  fill: yellow;
+  &:hover {
+    transform:scale(1.2);
+  }
 `
 export const MarketCapRank = styled.p `
 

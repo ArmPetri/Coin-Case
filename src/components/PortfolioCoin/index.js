@@ -1,5 +1,6 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useRef, useEffect} from 'react';
 import {Context} from '../../context/coinMarketsContext';
+import {PortfolioContext} from '../../context/portfolioContext';
 import {
   CoinRow,
   CoinData,
@@ -37,7 +38,9 @@ const PortfolioCoin = ({
   priceChange,
   marketCap}) => {
     const [whichTooltip, setWhichTooltip] = useState('')
-    const {portfolioCoins, addToPorfolio, removeFromPortfolio} = useContext(Context)
+    const {portfolioCoins, addToPorfolio, removeFromPortfolio, currency} = useContext(Context)
+    const {holdings, profitandloss, arrrrr, portChangeArr, pnlArr, remainingInitialArr} = useContext(PortfolioContext)
+    const totalBalance = useRef(0)
     const [whichModal, setWhichModal] = useState('')
     const [showModal, setShowModal] = useState(false)
 
@@ -49,14 +52,36 @@ const PortfolioCoin = ({
     function starTheIcon() {
       const alreadyInPortfolio = portfolioCoins.some(portfolioCoin => 
         portfolioCoin.id === coin.id,
-        )
+      )
+
+      const theCoin = portfolioCoins.find(portfolioCoin => {
+          if(portfolioCoin.id === coin.id){
+            return portfolioCoin
+          } 
+        }
+      )
       if(alreadyInPortfolio) {
-        return <Star onClick={()=> {
-          removeFromPortfolio(coin.id)}} src={StarIconYellow}></Star>
-    } 
-        return <Star onClick={()=> {
-          addToPorfolio(coin)}} src={StarIcon}></Star>
+            return <Star onClick={()=> {
+              removeFromPortfolio(theCoin)}} src={StarIconYellow}></Star>
+              } 
+                return <Star onClick={()=> {
+                  addToPorfolio(coin.id)}} src={StarIcon}></Star>
     }
+
+    const [pnl, pnlPercentage, remainingInitial] = profitandloss(symbol, price)
+    const [holding, holdingUsd, eachPortChange] = holdings(symbol, price)
+
+    useEffect(() => {
+      if(totalBalance.current !== 0) {
+        let balanceRef = totalBalance.current.innerHTML
+        arrrrr.push(balanceRef.slice(1, balanceRef.indexOf(' ')));
+        portChangeArr.push(eachPortChange)
+      }
+      if(pnl !== 0) {
+        pnlArr.push(pnl)
+        remainingInitialArr.push(remainingInitial)
+      }
+    }, [holdings()])
 
   return (
     <>
@@ -73,7 +98,7 @@ const PortfolioCoin = ({
           <Symbol>{symbol}</Symbol>
         </CoinData>
         <CoinData>
-          <CurrentPrice>${price}</CurrentPrice>
+          <CurrentPrice>{currency==="usd" ? '$' : '€'}{price}</CurrentPrice>
         </CoinData>
         <CoinData>
           {priceChange > 0 ? (<PriceChangePositive>{priceChange.toFixed(2)}%</PriceChangePositive>) : (<PriceChangeNegative>{priceChange.toFixed(2)}%</PriceChangeNegative>) }
@@ -82,10 +107,16 @@ const PortfolioCoin = ({
           <MarketCap>${marketCap.toLocaleString()}</MarketCap>
         </CoinData>
         <CoinData>
-          <Holdings>1324124</Holdings>
+          <Holdings ref={totalBalance}>{holdingUsd < 0 ? "-$" + Math.abs(holdingUsd) : "$" + holdingUsd} <br />
+          {holding + symbol.toUpperCase()}
+            </Holdings>
         </CoinData>
         <CoinData>
-          <PNL> - </PNL>
+        <PNL type={pnl === 0 ? "rgba(178,198,242,0.69)" : pnl > 0 ? "#44D400" : pnl < 0 && "#D40044"}>
+            {(pnl > 0 ? "+" : pnl < 0 ? "-" : "") + "$" + Math.abs(pnl)}
+            <br />
+            {isNaN(pnlPercentage) ? "0.00%" : (pnlPercentage > 0 ? "+" : pnlPercentage < 0 ? "-" : "") + Math.abs(pnlPercentage) + "%"}
+            </PNL> 
           <Transactions>
             <Tooltip>
             <Plus onClick={openModal} id="addTransaction" 
@@ -112,8 +143,6 @@ const PortfolioCoin = ({
             </Greater>
             {whichTooltip==='View' && <TooltipText>View Transactions</TooltipText>}
             </Tooltip>
-
-
           </Transactions>
         </CoinData>
 

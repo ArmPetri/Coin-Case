@@ -1,10 +1,10 @@
 import React, {useContext} from 'react'
-import { Context } from '../../context/portfolioContext'
+import {PortfolioContext} from '../../context/portfolioContext';
 import { Overlay, Form, CloseBtn, FormTitle, SectionTable, TableHead, TableRow, TableH, TableBody} from './PortfolioViewModalElements'
 import PortfolioTransaction from '../PortfolioTransaction'
 
 const Modal = ({showModal, setShowModal, price, coin}) => {
-  const {transactions} = useContext(Context)
+  const {firetransactions} = useContext(PortfolioContext)
 
     return (
       <>
@@ -27,10 +27,10 @@ const Modal = ({showModal, setShowModal, price, coin}) => {
             </TableRow>
           </TableHead>
           <TableBody >
-          {transactions.map((transaction) => {
+          {firetransactions.map((transaction) => {
             return (
-              transaction.Coin === coin &&
-                <PortfolioTransaction transaction={transaction} index={transaction.Index} coin={transaction.Coin} type={transaction.Type} price={transaction.Price} quantity={transaction.Quantity} total={transaction.Total} currentPrice={price}></
+              transaction.transaction.Coin === coin &&
+                <PortfolioTransaction transaction={transaction.transaction} uid={transaction.uid} index={transaction.transaction.Index} coin={transaction.transaction.Coin} type={transaction.transaction.Type} price={transaction.transaction.Price} quantity={transaction.transaction.Quantity} total={transaction.transaction.Total} currentPrice={price}></
                PortfolioTransaction> 
             )
           })}

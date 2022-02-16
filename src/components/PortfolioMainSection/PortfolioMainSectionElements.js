@@ -38,24 +38,7 @@ export const Cards = styled.div `
   }
 `
 
-export const AddCoinBtn = styled.button `
-  height: 34px;
-  border-radius: 5px;
-  background:rgba(68, 212, 0, 0.55);
-  color: #E5ECFA;
-  border:none;
-  align-self: flex-end;
-  cursor: pointer;
-  padding: 0 16px;
-  transition: opacity 0.2s ease-in;
-
-  &:hover {
-    opacity: 0.8;
-  }
-`
-
 export const SectionTable = styled.table `
-
 `
 
 export const TableHead = styled.thead `

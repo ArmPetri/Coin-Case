@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
-import {Context} from '../../context/portfolioContext';
+import {PortfolioContext} from '../../context/portfolioContext';
 import { Overlay, Form, CloseBtn, FormTitle, FormLabel, FormInput, SubmitBtn, Tab, TabName, CancelBtn, BtnWrap, CoinSymbol, CoinQuantity, QuantityInput} from './PortfolioAddModalElements'
 
 
@@ -22,7 +22,7 @@ const Modal = ({showModal, setShowModal, symbol}) => {
     Total: 0
   })
 
-  const {addTransaction} = useContext(Context)
+  const {addTransaction} = useContext(PortfolioContext)
 
   const buyTab = tab==='Buy'
   const sellTab = tab==='Sell'

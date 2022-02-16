@@ -1,8 +1,11 @@
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 import {FaSun} from 'react-icons/fa'
 import {FaMoon} from 'react-icons/fa'
 import {RiArrowDownSFill} from 'react-icons/ri'
 import {RiArrowUpSFill} from 'react-icons/ri'
+import {FaUserAlt} from "react-icons/fa";
+
 
 
 export const Nav = styled.nav `
@@ -61,6 +64,15 @@ export const Currency = styled.a `
   }
 `
 
+export const User  = styled(FaUserAlt) `
+  color: #E5ECFA;
+  margin:0.5rem;
+
+  &:hover {
+    color: #4C7CE0;
+  }
+`
+
 export const SunTheme = styled(FaSun) `
   color: #E5ECFA
   width: 80%;
@@ -87,6 +99,53 @@ export const Dropdown = styled.div `
   // opacity: 0.9;
   border-radius: 15%;
   text-align:center;
+`
+
+export const UserDropdown = styled.div `
+  position: absolute;
+  top: 3rem;
+  right: 2rem;
+  border: 0.1rem solid #E5ECFA;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1rem;
+  justify-content: space-around;
+  align-items: start;
+  background: #000615;
+  border-radius: 8px;
+  z-index: 3;
+
+  p {
+    color:#E5ECFA;
+    font-size:1rem;
+    padding-top: 2px;
+    margin-top: 2px;
+
+    &:hover {
+      color: #4C7CE0;
+      cursor:pointer;
+    }
+  }
+`
+
+export const UserName = styled.span `
+  color: rgba(178,198,242,0.69);
+  font-size:1rem;
+  padding-top: 2px;
+  margin-top: 2px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+`
+
+export const PortfolioLink =styled(Link)`
+  color:#E5ECFA;
+  font-size:1rem;
+  text-decoration:none;
+
+  &:hover {
+    color: #4C7CE0;
+    cursor:pointer;
+  }
 `
 
 export const CurrencySpan = styled.span `
