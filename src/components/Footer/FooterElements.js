@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
+import { device } from '../../styles/mediaQueries'
 
 export const FooterWrapper = styled.section `
   bottom:0;
@@ -13,15 +13,29 @@ export const FooterWrapper = styled.section `
   color: #E5ECFA;
   font-size: 14px;
 
+  @media ${device.xs} {
+    height: 5rem;
+  }
+  @media ${device.md} {
+    height: auto;
+    position: unset;
+  }
 `
 export const FooterContainer = styled.div `
-  height: 100%;
-  width: 1166px;
-  margin: 0 100px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr; 
-  justify-content: space-between;
   align-items:center;
+
+  @media ${device.xs} {
+    height: 2rem;
+    grid-template-columns: 1fr; 
+  }
+  @media ${device.lg} {
+    height: 100%;
+    width: 1166px;
+    margin: 0 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    justify-content: space-between;
+  }
 `
 export const Description = styled.div `
   display: flex;
@@ -33,6 +47,19 @@ export const Description = styled.div `
   p {
     padding-top: 20px
   }
+
+  @media ${device.xs} {
+    width: 100%;
+
+    p:nth-of-type(1) {
+      display: none;
+    }
+  }
+  @media ${device.lg} {
+    p:nth-of-type(1) {
+      display: flex;
+    }
+  }
 `
 export const LinksContainer = styled.div `
   display:flex;
@@ -42,13 +69,24 @@ export const LinksContainer = styled.div `
   height: 100%;
   padding-top: 40px;
   padding-bottom: 100px;
+
+  @media ${device.xs} {
+      display:none;
+  }
+  @media ${device.lg} {
+    display: flex;
+  }
 `
 export const Title = styled.h5 `
   font-size: 0.875rem;
 `
-export const Links = styled(Link) `
+export const Links = styled.a `
   text-decoration: none;
   color: #E5ECFA;
+
+  &:hover {
+    cursor: pointer;
+  }
 `
 export const Donations = styled.div `
   display:flex;
@@ -59,6 +97,13 @@ export const Donations = styled.div `
   padding-top: 40px;
   padding-bottom: 100px;
   color: #E5ECFA;
+
+  @media ${device.xs} {
+    display:none;
+  }
+  @media ${device.lg} {
+    display: flex;
+  }
 `
 export const CoinName = styled.h5 `
   font-size: 0.875rem;
@@ -77,6 +122,13 @@ export const Subscription = styled.div `
   p {
     padding-top: 10px;
   }
+
+  @media ${device.xs} {
+    display:none;
+  }
+  @media ${device.lg} {
+    display: flex;
+  }
 `
 export const Form = styled.form `
   heigth: 100%;
@@ -91,6 +143,7 @@ export const Email = styled.input `
   border-radius: 5px;
   height: 1.5rem;
   color: #000615;
+
   outline:none;
   transition: border 0.2s ease;
   border: 3px solid #E5ECFA;
@@ -98,6 +151,7 @@ export const Email = styled.input `
   &:focus {
     outline: none; 
     border: 3px solid #0044d4;
+  }
 `
 export const Button = styled.button `
   width: 85px;
@@ -107,7 +161,6 @@ export const Button = styled.button `
   border: none;
   border-radius: 5px;
   cursor: pointer;
-
 
   &:hover {
     opacity:0.8;

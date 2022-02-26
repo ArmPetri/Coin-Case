@@ -1,16 +1,23 @@
 import styled from 'styled-components'
+import { device } from '../../styles/mediaQueries'
 
 import {RiArrowDownSFill} from 'react-icons/ri'
 import {RiArrowUpSFill} from 'react-icons/ri'
 
 export const DropdownWrapper = styled.div `
-  width: 100%;
   user-select: none;
   position: relative;
   margin: 20px;
   border: 5px;
   display:flex;
   justify-content: center;
+  
+  @media ${device.xs} {
+    align:items: center;
+  }
+  @media ${device.sm} {
+    width: 100%;
+  }
 `
 
 export const DropdownBtn = styled.div `
@@ -62,9 +69,11 @@ export const DropdownItem = styled.div `
 export const Arrdown = styled(RiArrowDownSFill) `
   color: black;
 `
+
 export const Arrup = styled(RiArrowUpSFill) `
   color: black;
 `
+
 export const Section = styled.section `
   width: 100vw;
   height: 100%
@@ -74,12 +83,30 @@ export const Section = styled.section `
 
 export const SectionContainer = styled.div `
   height: 100%;
-  width: 1166px;
   margin: 0 auto;
   display: flex;
   flex-direction:column;
   justify-content: center
   align-items:center;
+
+  @media ${device.xs} {
+    min-width: 359px; 
+    max-width: 500px;
+    overflow-x: hidden;
+  }
+  @media ${device.sm} {
+    max-width: 536px;
+  }
+  @media ${device.md} {
+    max-width: 730px;
+    font-size: 1rem;
+  }
+  @media ${device.lg} {
+    max-width: 930px;
+  }
+  @media ${device.xl} {
+    min-width: 1166px;
+  }
 `
 
 export const SectionTitle = styled.h1 `

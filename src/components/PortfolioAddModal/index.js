@@ -1,7 +1,8 @@
 import React, {useContext, useState, useEffect} from 'react'
 import {PortfolioContext} from '../../context/portfolioContext';
 import { Overlay, Form, CloseBtn, FormTitle, FormLabel, FormInput, SubmitBtn, Tab, TabName, CancelBtn, BtnWrap, CoinSymbol, CoinQuantity, QuantityInput} from './PortfolioAddModalElements'
-
+import { HamburgerContext } from '../../context/hamburgerContext'
+import { getAuth } from '@firebase/auth';
 
 const Modal = ({showModal, setShowModal, symbol}) => {
   const [tab, setTab] = useState('Buy');
@@ -23,6 +24,10 @@ const Modal = ({showModal, setShowModal, symbol}) => {
   })
 
   const {addTransaction} = useContext(PortfolioContext)
+  const {setModalOpen} = useContext(HamburgerContext)
+
+  const auth = getAuth();
+  const user = auth.currentUser;
 
   const buyTab = tab==='Buy'
   const sellTab = tab==='Sell'
@@ -56,49 +61,52 @@ useEffect(() => {
     
     if(buyTab) {
        setBuy({...buy, Index: Math.random(Date.now() + buy.Index+1)*100})
-      addTransaction(buy);
+       addTransaction(buy, user.uid);
     } else {
       setSell({...sell, Index: Math.random(Date.now() + sell.Index+2)*100})
-      addTransaction(sell);
+      addTransaction(sell, user.uid);
     }
   }
 
   return (
     <>
     {showModal ? (
-         <Overlay >
-      <Form autoComplete="off" onSubmit={handleSubmit}>
-        <CloseBtn src={CloseBtn} onClick={() => setShowModal(prev => !prev)}></CloseBtn>
-        <FormTitle>Add Transaction</FormTitle>
-        <Tab>
-          <TabName onClick={() => setTab(() => 'Buy')} active={tab==='Buy'}>Buy</TabName>
-          <TabName onClick={() => setTab(() => 'Sell')} active={tab === 'Sell'}>Sell</TabName>
-        </Tab>
-        
-        {buyTab && <>
-        <FormLabel>Price Per Coin<FormInput type='number' name='Price' value={buy.Price} onChange={handleChange}></FormInput></FormLabel>
-        <FormLabel>Quantity 
-          <CoinQuantity>
-        <QuantityInput type='number' name='Quantity' value={buy.Quantity} onChange={handleChange}></QuantityInput><CoinSymbol>{symbol}</CoinSymbol></CoinQuantity> </FormLabel>
-        <FormLabel>Total Spent <FormInput readOnly type='number' className="grey"  name='Total' value={buytotal()}></FormInput></FormLabel> 
-        </>
-        }
-        {sellTab && 
-          <>
-            <FormLabel>Price Per Coin<FormInput type='number' name='Price' placeholder='0' value={sell.Price} onChange={handleChange}></FormInput></FormLabel>
-            <FormLabel>Quantity
-              <CoinQuantity>
-              <QuantityInput type='number' name='Quantity' placeholder="0" value={sell.Quantity} onChange={handleChange}></QuantityInput><CoinSymbol>{symbol}</CoinSymbol></CoinQuantity></FormLabel>
-            <FormLabel>Total Received<FormInput disabled type='number' className="grey"  name='Total' placeholder='0' value={selltotal()} onChange={handleChange}></FormInput></FormLabel> 
+      <Overlay >
+        <Form autoComplete="off" onSubmit={handleSubmit}>
+          <CloseBtn onClick={() => {
+            setModalOpen(false)
+            setShowModal(prev => !prev)
+          }}></CloseBtn>
+          <FormTitle>Add Transaction</FormTitle>
+          <Tab>
+            <TabName onClick={() => setTab(() => 'Buy')} active={tab==='Buy'}>Buy</TabName>
+            <TabName onClick={() => setTab(() => 'Sell')} active={tab === 'Sell'}>Sell</TabName>
+          </Tab>
+          {buyTab && <>
+          <FormLabel>Price Per Coin<FormInput type='number' name='Price' value={buy.Price} onChange={handleChange}></FormInput></FormLabel>
+          <FormLabel>Quantity 
+            <CoinQuantity>
+          <QuantityInput type='number' name='Quantity' value={buy.Quantity} onChange={handleChange}></QuantityInput><CoinSymbol>{symbol}</CoinSymbol></CoinQuantity> </FormLabel>
+          <FormLabel>Total Spent <FormInput readOnly type='number' className="grey"  name='Total' value={buytotal()}></FormInput></FormLabel> 
           </>
-        }
-        <BtnWrap>
-          <CancelBtn onClick={() => setShowModal(prev => !prev)}>Cancel</CancelBtn>
-          <SubmitBtn type="submit"></SubmitBtn>
-        </BtnWrap>
-       
-      </Form>``
-    </Overlay>
+          }
+          {sellTab && <>
+          <FormLabel>Price Per Coin<FormInput type='number' name='Price' placeholder='0' value={sell.Price} onChange={handleChange}></FormInput></FormLabel>
+          <FormLabel>Quantity
+            <CoinQuantity>
+            <QuantityInput type='number' name='Quantity' placeholder="0" value={sell.Quantity} onChange={handleChange}></QuantityInput><CoinSymbol>{symbol}</CoinSymbol></CoinQuantity></FormLabel>
+          <FormLabel>Total Received<FormInput disabled type='number' className="grey"  name='Total' placeholder='0' value={selltotal()} onChange={handleChange}></FormInput></FormLabel> </>
+          }
+          <BtnWrap>
+            <CancelBtn onClick={() => {
+            setModalOpen(false)
+            setShowModal(prev => !prev)
+          }}>Cancel</CancelBtn>
+            <SubmitBtn type="submit" onClick={() => 
+            setModalOpen(false)}></SubmitBtn>
+          </BtnWrap>
+        </Form>
+      </Overlay>
     )
   : null }
     </>

@@ -21,7 +21,6 @@ const CoinMarketsContextProvider = ({children}) => {
     if (user) {
       const currentuser = auth.currentUser
       setUser(currentuser.uid)
-      console.log(currentuser.uid)
     } else {
       console.log('no user detected')
     }

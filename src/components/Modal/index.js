@@ -1,5 +1,6 @@
 import React, {useRef, useContext} from 'react'
 import {UserContext} from '../../context/userDataContext';
+import { HamburgerContext } from '../../context/hamburgerContext'
 import { Overlay, Form, CloseBtn, FormTitle, FormLabel, FormInput, SubmitBtn, FormSubtext } from './ModalElements'
 import {initializeFirebase} from "../../firebase";
 import {
@@ -12,6 +13,7 @@ initializeFirebase()
 
 const Modal = ({showModal, setShowModal, whichModal, setWhichModal}) => {
   const {logUserIn} = useContext(UserContext)
+  const {setModalOpen} = useContext(HamburgerContext)
 
 function switcharoo() {
   whichModal === 'login' ? setWhichModal('signup') : setWhichModal('login')
@@ -32,6 +34,7 @@ const handleSubmit = (e) => {
     ).then((userCredential) => {
       logUserIn()
       setShowModal(false)
+      setModalOpen(false)
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -47,6 +50,7 @@ const handleSubmit = (e) => {
     ).then((userCredential) => {
       logUserIn()
       setShowModal(false)
+      setModalOpen(false)
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -61,7 +65,8 @@ return (
     {showModal ? (
       <Overlay >
         <Form autoComplete="off" onSubmit={handleSubmit}>
-          <CloseBtn src={CloseBtn} onClick={() => {
+          <CloseBtn onClick={() => {
+              setModalOpen(false)
               setShowModal(prev => !prev)
             }}>
           </CloseBtn>

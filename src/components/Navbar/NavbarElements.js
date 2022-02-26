@@ -1,12 +1,10 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-import {FaSun} from 'react-icons/fa'
-import {FaMoon} from 'react-icons/fa'
+import { device } from '../../styles/mediaQueries'
 import {RiArrowDownSFill} from 'react-icons/ri'
 import {RiArrowUpSFill} from 'react-icons/ri'
 import {FaUserAlt} from "react-icons/fa";
-
-
+import CoinCase from '../../images/CoinCase.svg'
 
 export const Nav = styled.nav `
   height: 60px;
@@ -19,25 +17,39 @@ export const Nav = styled.nav `
 export const NavbarContainer = styled.div `
   height: 100%;
   width: 1166px;
-  margin: 0 100px;
   display: flex;
-  justify-content: flex-end;
-  align-items:center
+  align-items:center;
+  position:relative;
+
+  @media ${device.xs} {
+    justify-content: space-around;
+  }
+  @media ${device.lg} {
+    justify-content: flex-end;
+    margin: 0 100px;
+  }
 `
 export const NavMenu = styled.ul `
   display: flex;
   justify content: center;
   align-items:center;
   list-style: none;
-  
 `
 export const NavItem = styled.li `
-  padding-left:20px;
   cursor: pointer;
   color: #E5ECFA;
 
   &:last-of-type {
     padding-top: 0.2rem;
+  }
+
+  @media ${device.xs} {
+    &:last-of-type {
+      display:none;
+    }
+  }
+  @media ${device.sm} {
+    padding-left:20px;
   }
 `
 
@@ -45,9 +57,14 @@ export const NavLink = styled.a `
   color: #E5ECFA;
   text-decoration:none;
   transition: color ease-in 0.02s;
+  font-size: .8;
 
   &:hover {
     color: #4C7CE0;
+  }
+
+  &:nth-of-type(1) {
+    margin: 0 .5rem;
   }
 `
 export const Currency = styled.a `
@@ -59,8 +76,14 @@ export const Currency = styled.a `
   border: none;
 
   &:hover {
-
     color: #4C7CE0;
+  }
+
+  @media ${device.xs} {
+    display: none;
+  }
+  @media ${device.sm} {
+    display: initial;
   }
 `
 
@@ -73,34 +96,19 @@ export const User  = styled(FaUserAlt) `
   }
 `
 
-export const SunTheme = styled(FaSun) `
-  color: #E5ECFA
-  width: 80%;
-  height: 80%;
-`
-
-export const MoonTheme = styled(FaMoon) `
-  color: #E5ECFA
-  width: 80%;
-  height: 80%;
-`
-
 export const Dropdown = styled.div `
-  width: 90px;
-  height: 75px;
   position: absolute;
   border: 1px solid #E5ECFA;
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  padding: 0.5rem 1rem;
   justify-content: center;
   align-items: center;
   background: #000615;
-  // opacity: 0.9;
   border-radius: 15%;
   text-align:center;
+  z-index: 2;
 `
-
 export const UserDropdown = styled.div `
   position: absolute;
   top: 3rem;
@@ -149,17 +157,65 @@ export const PortfolioLink =styled(Link)`
 `
 
 export const CurrencySpan = styled.span `
-  padding: 5px;
+  padding: 2px;
   width: 100%;
 
- &:hover {
+  &:hover {
   color: #4C7CE0;
- }
+  }
 ` 
 
 export const Arrdown = styled(RiArrowDownSFill) `
-
 `
 export const Arrup = styled(RiArrowUpSFill) `
+`
 
+export const Hamburger = styled.div `
+  width: 2rem;
+  height: 2rem;
+  text-align:center;
+  flex: direction: column;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    display: block;
+    width: 20px;
+    height: .5rem;
+    border-bottom: 2px solid #E5ECFA;
+    margin: auto;
+  }
+  span:nth-of-type(1) {
+    transform-origin: 0% 0%;
+    transition: transform 0.4s ease-in-out;
+  }
+  span:nth-of-type(2) {
+    transition: transform 0.2s ease-in-out;
+  }
+  span:nth-of-type(3) {
+    transform-origin: 0% 100%;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  @media ${device.lg} {
+    display: none;
+  }
+`
+
+export const SpanOn = styled.span `
+`
+
+export const NavLogo = styled(Link) `
+  @media ${device.xs} {
+    background: url(${CoinCase});
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 30%;
+    height: 25px;
+  }
+
+  @media ${device.lg} {
+    display: none;
+  }
 `

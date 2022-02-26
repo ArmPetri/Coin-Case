@@ -6,16 +6,19 @@ import {CoinMarketsContextProvider} from './context/coinMarketsContext'
 import {PortfolioContextProvider} from './context/portfolioContext'
 import { CoinPageContextProvider } from './context/coinPageContext'
 import {UserDataContextProvider} from './context/userDataContext'
+import { HamburgerContextProvider } from './context/hamburgerContext'
 
 ReactDOM.render(
   <CoinMarketsContextProvider>
     <UserDataContextProvider>
       <PortfolioContextProvider>
         <CoinPageContextProvider>
+        <HamburgerContextProvider>
           <React.StrictMode>
             <App />
           </React.StrictMode>,
-        </CoinPageContextProvider>
+        </HamburgerContextProvider>
+        </CoinPageContextProvider>      
       </PortfolioContextProvider>
     </UserDataContextProvider>
   </CoinMarketsContextProvider>,

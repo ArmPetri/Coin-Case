@@ -10,8 +10,8 @@ import redit from '../../images/social_redit.svg'
 import twitter from '../../images/social_twitter.svg'
 
 const spinnerCss = css`
-display: block;
-margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 `
 
 const Coins = () => {
@@ -20,39 +20,39 @@ const Coins = () => {
   const {coinData, loading} = useContext(CoinContext)
 
   const {name, symbol, image, links, market_data} = coinData;
-const {thumb} = image || {};
-const {homepage, blockchain_site, repos_url, facebook_username, subreddit_url, twitter_screen_name} = links || {};
-const {github} = repos_url || {};
-const {current_price,
-  market_cap_rank,
-  market_cap,
-  total_volume,
-  fully_diluted_valuation,
-  price_change_percentage_24h : h24,
-  price_change_percentage_7d: d7,
-  price_change_percentage_14d: d14,
-  price_change_percentage_30d: d30,
-  price_change_percentage_60d: d60,
-  price_change_percentage_200d: d200,
-  price_change_percentage_1y: y1,
-  circulating_supply,
-  total_supply,
-  max_supply,
-  ath,
-  ath_date} = market_data || {};
-let {usd: price} =  current_price || {};
-let {usd: Mrkt_Cap} =  market_cap || {};
-let {usd: Tot_Vol} = total_volume || {};
-let {usd: Dil_Val} = fully_diluted_valuation || {};
-const {usd: Ath} = ath || {};
-const {usd: Ath_date} = ath_date || {};
-const {} = blockchain_site || {};
-const {0: home} = homepage || {};
+  const {thumb} = image || {};
+  const {homepage, blockchain_site, repos_url, facebook_username, subreddit_url, twitter_screen_name} = links || {};
+  const {github} = repos_url || {};
+  const {current_price,
+    market_cap_rank,
+    market_cap,
+    total_volume,
+    fully_diluted_valuation,
+    price_change_percentage_24h : h24,
+    price_change_percentage_7d: d7,
+    price_change_percentage_14d: d14,
+    price_change_percentage_30d: d30,
+    price_change_percentage_60d: d60,
+    price_change_percentage_200d: d200,
+    price_change_percentage_1y: y1,
+    circulating_supply,
+    total_supply,
+    max_supply,
+    ath,
+    ath_date} = market_data || {};
+  let {usd: price} =  current_price || {};
+  let {usd: Mrkt_Cap} =  market_cap || {};
+  let {usd: Tot_Vol} = total_volume || {};
+  let {usd: Dil_Val} = fully_diluted_valuation || {};
+  const {usd: Ath} = ath || {};
+  const {usd: Ath_date} = ath_date || {};
+  const {} = blockchain_site || {};
+  const {0: home} = homepage || {};
 
-function whichOption(thisOne) {
-  let newStr
-    if(thisOne.includes('https://www.')){
-      newStr = thisOne.split('https://www.')
+  function whichOption(thisOne) {
+    let newStr
+      if(thisOne.includes('https://www.')){
+        newStr = thisOne.split('https://www.')
      } else if(thisOne.includes('http://www.')) {
         newStr = thisOne.split('http://www.')
      } else if(thisOne.includes('https://')){

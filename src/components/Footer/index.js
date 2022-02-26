@@ -18,7 +18,7 @@ const Footer = () => {
       <FooterContainer>
         <Description>
           <p>Coincase provides a way to keep track of your profits, losses and portfolio valuation. </p>
-          <p>© 2021 Coincase. All Rights Reserved.</p>
+          <p>© {new Date().getFullYear()} Coincase. All Rights Reserved.</p>
         </Description>
         <LinksContainer>
           <Title>Coincase</Title>
@@ -26,7 +26,6 @@ const Footer = () => {
           <Links>Methodology</Links>
           <Links>Careers</Links>
           <Links>Contact Us</Links>
- 
         </LinksContainer>
       <Donations>
         <Title>Donations</Title>

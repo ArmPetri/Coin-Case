@@ -58,7 +58,6 @@ export const FormInput = styled.input `
   color:black;
   text-indent: 1rem;
   margin-top: 10px;
-
   transition: box-shadow 0.2s ease-in;
 
   &:focus {
@@ -85,10 +84,10 @@ export const SubmitBtn = styled.input `
 `
 
 export const FormSubtext = styled.div `
-text-align:center;
+  text-align:center;
 
-span {
-  color: #44D400;
-  cursor: pointer;
-}
+  span {
+    color: #44D400;
+    cursor: pointer;
+  }
 `

@@ -2,6 +2,7 @@ import React, {useContext, useState, useEffect} from 'react'
 
 import {Section, SectionContainer, SectionTitle, Utilities, Cards, SectionTable, TableHead, TableRow, TableH, TableBody} from './PortfolioMainSectionElements'
 import Card from '../Card/index'
+import PortfolioAccess from '../PortfolioAccess/index'
 import PortfolioCoin from '../PortfolioCoin/index'
 import {Context} from '../../context/coinMarketsContext'
 import {PortfolioContext} from '../../context/portfolioContext'
@@ -41,6 +42,7 @@ const PortfolioMainSection = () => {
 
   return (
   <Section>
+    { !access && <PortfolioAccess/>}
     {
       access && 
       <SectionContainer>

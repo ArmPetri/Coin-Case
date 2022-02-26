@@ -72,9 +72,16 @@ import {TransactionRow,
             <Type type={Tab}>{type}</Type>
           </TransactionData>
           <TransactionData>
-          {
-            !enabled ? <Price name="Price" disabled value={buy.Price}></Price> : <Price name="Price" type="number" onChange={handleChange} value={buy.Price}></Price>
-          }
+            {!enabled ? 
+              type === "Buy" ? 
+              (<Price name="Price" disabled value={"$" + buy.Price}></Price>) : 
+              (<Price name="Price" disabled value={"$" + sell.Price}></Price>)
+              :
+              enabled &&
+              type === "Buy" ? 
+              (<Price name="Price" type="number" onChange={handleChange} value={buy.Price}></Price>):
+              (<Price name="Price" type="number" onChange={handleChange} value={sell.Price}></Price>)
+            }
           </TransactionData>
           <TransactionData>
           {

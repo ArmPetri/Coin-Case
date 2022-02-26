@@ -42,11 +42,11 @@ const MainSection = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-          {coins.map(coin => {
-            return (
-              <Coin key={coin.id} coin={coin} name={coin.name} marketCapRank={coin.market_cap_rank} logo={coin.image} symbol={coin.symbol} price={coin.current_price} priceChange={coin.price_change_percentage_24h} marketCap={coin.market_cap} currency={currency}></Coin>
-            )
-          })}
+            {coins.map(coin => {
+              return (
+                <Coin key={coin.id} coin={coin} name={coin.name} marketCapRank={coin.market_cap_rank} logo={coin.image} symbol={coin.symbol} price={coin.current_price} priceChange={coin.price_change_percentage_24h} marketCap={coin.market_cap} currency={currency}></Coin>
+              )
+            })}
           </TableBody>
         </SectionTable>
       </SectionContainer>
