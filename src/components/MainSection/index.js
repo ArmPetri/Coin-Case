@@ -26,7 +26,7 @@ const MainSection = () => {
               <CurrencySpan onClick = {() => whichCurrency('eur')}>EUR</CurrencySpan>
             </Dropdown>}
           </CurrencyButton>
-          <PortfolioLink>
+          <PortfolioLink to='/portfolio'>
             <PortfolioStar src={StarIconYellow}></PortfolioStar>
               Portfolio
           </PortfolioLink>
