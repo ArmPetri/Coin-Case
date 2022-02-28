@@ -197,6 +197,8 @@ export const Transactions = styled.div `
 export const Plus = styled(BiPlus) `
   color: #E5ECFA;
   transition: all 0.1s ease-in-out;
+  width: 100%;
+  height: 100%;
 
   &:hover {
     color: #4C7CE0;
@@ -207,6 +209,8 @@ export const Plus = styled(BiPlus) `
 export const Greater = styled(IoChevronForwardOutline) `
   color: #E5ECFA;
   transition: all 0.1s ease-in-out;
+  width: 100%;
+  height: 100%;
 
   &:hover {
     color: #4C7CE0;
@@ -214,11 +218,11 @@ export const Greater = styled(IoChevronForwardOutline) `
   }
 `
 export const Tooltip = styled.div `
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   position: relative;
+  width: 20px;
+  height: 20px;
 
   &:first-of-type {
     padding-bottom: 0.1rem;

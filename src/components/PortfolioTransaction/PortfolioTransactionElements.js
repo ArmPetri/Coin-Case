@@ -61,7 +61,7 @@ export const TransactionData = styled.td `
       width: 10%;
     } 
     &:nth-child(7) {
-      width: 10%;
+      width: 13%;
       justify-content: space-around;
     } 
   }
@@ -170,7 +170,7 @@ export const SellQuantity = styled.input `
   }
 
   &:enabled {
-  margin: 0 0.1rem;
+    margin: 0 0.1rem;
     background: #E5ECFA;
     color: #47526A;
     text-indent: 1rem;
@@ -199,22 +199,49 @@ export const EditBtn = styled(AiFillEdit) `
   &:hover {
     color: #4C7CE0;
   }
+
+  @media ${device.xs} {
+    width: 20px;
+    height: 20px;
+  }
+  @media ${device.md} {
+    width: initial;
+    height: initial;
+  }
 `
 
 export const DoneBtn = styled(AiOutlineFileDone) `
   color: #E5ECFA;
   color: rgba(71, 82, 106, 0.5);
-
+  
   &:hover {
     color: #4C7CE0;
+  }
+
+  @media ${device.xs} {
+    width: 20px;
+    height: 20px;  
+  }
+  @media ${device.md} {
+    width: initial;
+    height: initial;
   }
 `
 
 export const RemoveBtn = styled(FiTrash2) ` 
   color: #E5ECFA;
   color: rgba(71, 82, 106, 0.5);
-
+  
   &:hover {
     color: #4C7CE0;
+  }
+
+  @media ${device.xs} {
+    width: 20px;
+    height: 20px;  
+  }
+  @media ${device.md} {
+    width: initial;
+    height: initial;
   }
 `

@@ -106,9 +106,9 @@ import {TransactionRow,
             <PNL type={type === "Buy" ? (profitandloss() > 0 ? "#44D400" : "#D40044") : ""}>{type === "Buy" ? ((profitandloss() > 0 ? "+" : "-") + "$" + Math.abs(parseFloat(profitandloss().toFixed(2)))) : "-"}</PNL>
           </TransactionData>
           <TransactionData>
-          {enabled && <DoneBtn onClick={() => editing(uid, updatedTransaction)}></DoneBtn>}
-          {!enabled && <EditBtn onClick={() => setEnabled(!enabled)}></EditBtn>}
-          <RemoveBtn onClick={() => removeTransaction(index, uid)}></RemoveBtn>
+            {enabled && <DoneBtn onClick={() => editing(uid, updatedTransaction)}></DoneBtn>}
+            {!enabled && <EditBtn onClick={() => setEnabled(!enabled)}></EditBtn>}
+            <RemoveBtn onClick={() => removeTransaction(index, uid)}></RemoveBtn>
           </TransactionData>
         </TransactionRow>
       )
