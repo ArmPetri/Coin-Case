@@ -1,6 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react'
-import {PortfolioContext} from '../../context/portfolioContext';
 import { Overlay, Form, CloseBtn, FormTitle, FormLabel, FormInput, SubmitBtn, Tab, TabName, CancelBtn, BtnWrap, CoinSymbol, CoinQuantity, QuantityInput} from './PortfolioAddModalElements'
+import Notification from '../Notification';
+import {PortfolioContext} from '../../context/portfolioContext';
 import { HamburgerContext } from '../../context/hamburgerContext'
 import { getAuth } from '@firebase/auth';
 
@@ -10,18 +11,19 @@ const Modal = ({showModal, setShowModal, symbol}) => {
     Index: Math.random()*100,
     Coin: '',
     Type: '',
-    Price: '',
-    Quantity: '',
+    Price: 0,
+    Quantity: 0,
     Total: 0
   })
   const [sell, setSell] = useState({
     Index: Math.random()*100,
     Coin: '',
     Type: '',
-    Price: '',
-    Quantity: '',
+    Price: 0,
+    Quantity: 0,
     Total: 0
   })
+  const [message, setMessage] = useState(false)
 
   const {addTransaction} = useContext(PortfolioContext)
   const {setModalOpen} = useContext(HamburgerContext)
@@ -40,14 +42,13 @@ const Modal = ({showModal, setShowModal, symbol}) => {
     return parseFloat((sell.Price * sell.Quantity).toFixed(6));
    }
 
-useEffect(() => {
-  setBuy({...buy, Total: buytotal()})
-}, [buy.Price, buy.Quantity, buy.Total])
+  useEffect(() => {
+    setBuy({...buy, Total: buytotal()})
+  }, [buy.Price, buy.Quantity, buy.Total])
 
-useEffect(() => {
-  setSell({...sell, Total: selltotal()})
-}, [sell.Price, sell.Quantity, sell.Total])
-
+  useEffect(() => {
+    setSell({...sell, Total: selltotal()})
+  }, [sell.Price, sell.Quantity, sell.Total])
 
   const handleChange = (e) => {
     let {name, value} = e.target;
@@ -60,11 +61,19 @@ useEffect(() => {
     e.preventDefault();
     
     if(buyTab) {
-       setBuy({...buy, Index: Math.random(Date.now() + buy.Index+1)*100})
-       addTransaction(buy, user.uid);
-    } else {
-      setSell({...sell, Index: Math.random(Date.now() + sell.Index+2)*100})
-      addTransaction(sell, user.uid);
+      if(buy.Price && buy.Quantity > 0){
+        setBuy({...buy, Index: Math.random(Date.now() + buy.Index+1)*100})
+        addTransaction(buy, user.uid);
+        setMessage(true)
+        setTimeout(() => setMessage(false),1000)
+      }
+    } else if (sellTab) {
+        if((sell.Price && sell.Quantity > 0)){
+          setSell({...sell, Index: Math.random(Date.now() + sell.Index+2)*100})
+          addTransaction(sell, user.uid);
+          setMessage(true)
+          setTimeout(() => setMessage(false),1000)
+      }
     }
   }
 
@@ -72,6 +81,8 @@ useEffect(() => {
     <>
     {showModal ? (
       <Overlay >
+        {message ? <Notification></Notification> : null}
+        {message ? <Notification></Notification> : null}
         <Form autoComplete="off" onSubmit={handleSubmit}>
           <CloseBtn onClick={() => {
             setModalOpen(false)
