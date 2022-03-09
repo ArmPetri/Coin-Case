@@ -23,9 +23,9 @@ See top 100 cryptocurrencies (per market cap)
 Change base Currency (USD/EUR)
 See more detailed information about a specific coin
 Keep track of your crypto portfolio
--Add/Remove Coins to/from Portfolio
--Add Transactions to Portfolio
--Track the performance
+- Add/Remove Coins to/from Portfolio
+- Add Transactions to Portfolio
+- Track the performance
 Coin Converter
 
 ## UI
