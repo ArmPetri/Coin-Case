@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 import { getDB } from '../firebase.js'
-import { collection, doc, getDocs, setDoc, where, query, deleteDoc, onSnapshot } from '@firebase/firestore'
+import { collection, doc, getDocs, setDoc, where, query, deleteDoc} from '@firebase/firestore'
 import { getAuth, onAuthStateChanged } from '@firebase/auth';
 
 const Context = React.createContext();
@@ -12,8 +12,6 @@ const CoinMarketsContextProvider = ({children}) => {
   const [portfolioList, setPortfolioList] = useState([]);
   const [currency, setCurrency] = useState('usd');
   const [user, setUser] = useState('');
-
-
 
   const auth = getAuth();
 
@@ -58,7 +56,6 @@ const CoinMarketsContextProvider = ({children}) => {
   const removeFromPortfolio = async(coin) => {
     await removeCoinFromDb(coin.uid)
   }
-
 
   const removeCoinFromDb = async(id) => {
     const db = getDB();

@@ -91,3 +91,9 @@ export const FormSubtext = styled.div `
     cursor: pointer;
   }
 `
+
+export const Error = styled.p `
+  font-size: 0.8rem;
+  padding-left: 0.4rem;
+  color: #D40044;
+`
