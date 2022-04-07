@@ -28,6 +28,44 @@ React - Styled Components - HTML - CSS - Javascript
   - Track the performance
 - Coin Converter
 
+## Running Locally
+1. Clone the repo
+`git clone https://github.com/ArmPetri/Coin-Case.git`
+2. Go to the app directory
+`cd Coin-Case`
+3. Install packages
+`npm install`
+4. Open Project in the code editor  
+At the root of the project open .env_sample and rename it to .env. 
+You will need to replace the content inside of .env with your Firebase config keys. found in your Firebase project settings.  
+In order to do that you will need to set up a Firebase project.  
+
+### Firebase Setup
+1. First, you will need to create a Firebase project and get all the necessary keys in order to be able to use authentication and a database.  
+[Firebase Console](https://console.firebase.google.com/u/0/). 
+
+2. Add a web app.  
+![Firebase _1_2](https://user-images.githubusercontent.com/73338612/157653668-1dca06c7-19e8-42cc-aa9b-5a865536a01b.png)
+
+3. Copy all the keys from firebase configuration (firebaseConfig) to .env file. 
+
+![Firebase_3](https://user-images.githubusercontent.com/73338612/157653627-4b1af924-9b9a-4061-9d11-2a1664233885.png)
+
+4. Add user authentication with email/password. 
+
+![Firebase_4](https://user-images.githubusercontent.com/73338612/157653698-e974c5d3-2aa5-4f72-bb84-4fb8337c3388.png)
+
+5. Create a Firestore Database. 
+
+![Firebase_5](https://user-images.githubusercontent.com/73338612/157653729-0b759cc7-0e63-45ff-88af-023e55db6507.png)
+
+6. Now you should be able to use all the application features related to Firebase. 
+Run `npm start` And it should open [http://localhost:3000](http://localhost:3000) in your browser. 
+  
+  ***In order to access the portfolio page, you will need to create a user**
+
+
+
 ## UI
 ### Home
 ![home](https://user-images.githubusercontent.com/73338612/157529812-ca6a2c78-5890-48a9-bb69-1b108895e91f.png)
